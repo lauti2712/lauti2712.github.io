@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Lauti Dev</title>
+  <meta name="description" content="Aplicaciones web a medida que resuelven problemas reales. PiletasPro y Cocina de Vesuvio." />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f7f7f5;
+      --text: #1a1a1a;
+      --text-secondary: #6b6b6b;
+      --text-tertiary: #999;
+      --border: rgba(0,0,0,0.1);
+      --border-secondary: rgba(0,0,0,0.18);
+      --accent: #1a56db;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --bg-secondary: #242424;
+        --text: #f0f0f0;
+        --text-secondary: #aaa;
+        --text-tertiary: #666;
+        --border: rgba(255,255,255,0.1);
+        --border-secondary: rgba(255,255,255,0.18);
+        --accent: #4d8ef0;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .nav-logo { font-size: 15px; font-weight: 500; text-decoration: none; color: var(--text); }
+    .nav-links { display: flex; gap: 1rem; }
+    .nav-links a { font-size: 13px; color: var(--text-secondary); text-decoration: none; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero { text-align: center; padding: 4rem 1rem 3rem; border-bottom: 0.5px solid var(--border); }
+    .badge {
+      display: inline-block; font-size: 12px; padding: 4px 14px;
+      border-radius: 99px; background: var(--bg-secondary);
+      border: 0.5px solid var(--border); color: var(--text-secondary);
+      margin-bottom: 1.5rem; letter-spacing: 0.03em;
+    }
+    .hero h1 { font-size: 36px; font-weight: 500; line-height: 1.2; margin-bottom: 1rem; }
+    .hero p { font-size: 16px; color: var(--text-secondary); max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 10px 22px; border-radius: var(--radius-md);
+      background: var(--accent); color: #fff;
+      font-size: 14px; font-weight: 500; border: none;
+      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-ghost {
+      padding: 10px 22px; border-radius: var(--radius-md);
+      background: transparent; color: var(--text);
+      font-size: 14px; font-weight: 500;
+      border: 0.5px solid var(--border-secondary);
+      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+
+    /* SECTIONS */
+    .section { padding: 3rem 0; }
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.07em;
+      color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.4rem;
+    }
+    .section-title { font-size: 22px; font-weight: 500; margin-bottom: 0.4rem; }
+    .section-sub { font-size: 14px; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6; }
+
+    /* APP CARDS */
+    .apps-grid { display: grid; gap: 1.5rem; }
+    .app-card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .app-header { padding: 1.25rem 1.25rem 0.75rem; display: flex; align-items: flex-start; gap: 14px; }
+    .app-icon {
+      width: 50px; height: 50px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; flex-shrink: 0;
+      border: 0.5px solid var(--border);
+    }
+    .icon-blue { background: #e6f1fb; }
+    .icon-orange { background: #faeeda; }
+    .app-name { font-size: 17px; font-weight: 500; margin-bottom: 3px; }
+    .app-tagline { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+    .app-body { padding: 0 1.25rem 1.25rem; }
+    .app-problem {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.6;
+      margin-bottom: 1rem; padding: 0.75rem;
+      background: var(--bg-secondary); border-radius: var(--radius-md);
+      border-left: 3px solid var(--border-secondary);
+    }
+    .features-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.05em;
+      color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.6rem;
+    }
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.25rem; }
+    .feature-pill {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 10px; background: var(--bg-secondary);
+      border-radius: var(--radius-md); font-size: 12px;
+      color: var(--text-secondary); border: 0.5px solid var(--border);
+    }
+    .feature-pill i { font-size: 14px; color: var(--text-tertiary); flex-shrink: 0; }
+    .app-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 1rem; border-top: 0.5px solid var(--border);
+      flex-wrap: wrap; gap: 8px;
+    }
+    .stack-pills { display: flex; gap: 5px; flex-wrap: wrap; }
+    .stack-pill {
+      font-size: 11px; padding: 3px 9px; border-radius: 99px;
+      background: var(--bg-secondary); color: var(--text-tertiary);
+      border: 0.5px solid var(--border);
+    }
+    .app-link {
+      font-size: 13px; font-weight: 500; color: var(--accent);
+      text-decoration: none; display: flex; align-items: center; gap: 4px;
+    }
+
+    /* DIVIDER */
+    .divider { height: 0.5px; background: var(--border); }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem; }
+    .about-card {
+      background: var(--bg-secondary); border-radius: var(--radius-lg);
+      padding: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .about-card-main { grid-column: 1 / -1; }
+    .about-card h3 { font-size: 15px; font-weight: 500; }
+    .about-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+    .about-icon { font-size: 20px; color: var(--text-tertiary); margin-bottom: 4px; }
+
+    /* CONTACT */
+    .contact { padding: 3rem 0; text-align: center; }
+    .contact h2 { font-size: 20px; font-weight: 500; margin-bottom: 0.5rem; }
+    .contact p { font-size: 14px; color: var(--text-secondary); margin-bottom: 1.5rem; }
+    .contact-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 18px; border-radius: var(--radius-md);
+      font-size: 13px; font-weight: 500;
+      border: 0.5px solid var(--border-secondary);
+      background: transparent; color: var(--text);
+      text-decoration: none; cursor: pointer;
+    }
+    .contact-btn:hover { background: var(--bg-secondary); }
+
+    /* FOOTER */
+    footer {
+      padding: 1.5rem 0;
+      border-top: 0.5px solid var(--border);
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 26px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-card-main { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo"><i class="ti ti-code"></i> Lauti Dev</a>
+    <div class="nav-links">
+      <a href="#apps">Apps</a>
+      <a href="#about">Sobre mí</a>
+      <a href="#contact">Contacto</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="badge"><i class="ti ti-code"></i> Desarrollo de software a medida</div>
+    <h1>Soluciones que resuelven<br>problemas reales</h1>
+    <p>Aplicaciones web construidas para simplificar operaciones, reducir errores y darle a cada equipo las herramientas que necesita.</p>
+    <div class="hero-btns">
+      <a href="#apps" class="btn-primary"><i class="ti ti-apps"></i> Ver aplicaciones</a>
+      <a href="https://github.com/lauti2712" target="_blank" class="btn-ghost"><i class="ti ti-brand-github"></i> GitHub</a>
+    </div>
+  </section>
+
+  <section class="section" id="apps">
+    <div class="section-label">portafolio</div>
+    <div class="section-title">Aplicaciones desarrolladas</div>
+    <div class="section-sub">Cada app nació de una necesidad concreta, construida con foco en la usabilidad móvil y el trabajo en tiempo real.</div>
+
+    <div class="apps-grid">
+
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon icon-blue">💧</div>
+          <div>
+            <div class="app-name">PiletasPro</div>
+            <div class="app-tagline">El negocio de tu pileta, en orden.</div>
+          </div>
+        </div>
+        <div class="app-body">
+          <div class="app-problem">
+            Los pileteros gestionaban clientes, visitas, cobros y mensajes de forma manual. PiletasPro centraliza todo el ciclo operativo en una sola plataforma pensada para el rubro.
+          </div>
+          <div class="features-label">funcionalidades</div>
+          <div class="features-grid">
+            <div class="feature-pill"><i class="ti ti-user-circle"></i> Portal del cliente</div>
+            <div class="feature-pill"><i class="ti ti-device-mobile"></i> App piletero (PWA)</div>
+            <div class="feature-pill"><i class="ti ti-calendar"></i> Rutinas diarias</div>
+            <div class="feature-pill"><i class="ti ti-clock"></i> Inicio de servicio</div>
+            <div class="feature-pill"><i class="ti ti-receipt"></i> Pagos & cobros</div>
+            <div class="feature-pill"><i class="ti ti-message"></i> Mensajería</div>
+            <div class="feature-pill"><i class="ti ti-users"></i> Gestión pileteros</div>
+            <div class="feature-pill"><i class="ti ti-chart-bar"></i> Finanzas</div>
+          </div>
+          <div class="app-footer">
+            <div class="stack-pills">
+              <span class="stack-pill">HTML/CSS/JS</span>
+              <span class="stack-pill">Firebase</span>
+              <span class="stack-pill">PWA</span>
+            </div>
+            <a href="https://piletaspro.web.app" target="_blank" class="app-link">
+              <i class="ti ti-external-link"></i> Ver app
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-card">
+        <div class="app-header">
+          <div class="app-icon icon-orange">🍕</div>
+          <div>
+            <div class="app-name">Cocina de Vesuvio</div>
+            <div class="app-tagline">El control de tu cocina, en el bolsillo de todo el equipo.</div>
+          </div>
+        </div>
+        <div class="app-body">
+          <div class="app-problem">
+            La cocina de una pizzería coordinaba stock, producción y compras de forma verbal o en papel. Esta app centraliza todo en tiempo real, accesible desde cualquier celular.
+          </div>
+          <div class="features-label">funcionalidades</div>
+          <div class="features-grid">
+            <div class="feature-pill"><i class="ti ti-chef-hat"></i> Planificación</div>
+            <div class="feature-pill"><i class="ti ti-checklist"></i> Lista de producción</div>
+            <div class="feature-pill"><i class="ti ti-package"></i> Stock actual</div>
+            <div class="feature-pill"><i class="ti ti-shopping-cart"></i> Pendientes de compra</div>
+            <div class="feature-pill"><i class="ti ti-calculator"></i> Calc. de bollos</div>
+            <div class="feature-pill"><i class="ti ti-message-2"></i> Comunicaciones</div>
+            <div class="feature-pill"><i class="ti ti-settings"></i> Panel admin</div>
+            <div class="feature-pill"><i class="ti ti-refresh"></i> Tiempo real</div>
+          </div>
+          <div class="app-footer">
+            <div class="stack-pills">
+              <span class="stack-pill">React 18</span>
+              <span class="stack-pill">Firebase</span>
+              <span class="stack-pill">PWA</span>
+            </div>
+            <a href="https://stock-vesuvio.web.app" target="_blank" class="app-link">
+              <i class="ti ti-external-link"></i> Ver app
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section" id="about">
+    <div class="section-label">sobre el desarrollador</div>
+    <div class="section-title">Sobre mí</div>
+    <div class="about-grid">
+      <div class="about-card about-card-main">
+        <h3>Foco en lo que importa</h3>
+        <p>Cada app que construyo nace de un problema concreto de un equipo real. Trabajo con tecnologías modernas orientadas a móvil, tiempo real y bajo mantenimiento.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon"><i class="ti ti-device-mobile"></i></div>
+        <h3>Mobile-first</h3>
+        <p>PWA instalables, diseño responsive desde el celular.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon"><i class="ti ti-bolt"></i></div>
+        <h3>Tiempo real</h3>
+        <p>Firebase Firestore — cambios al instante en todos los dispositivos.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="contact" id="contact">
+    <h2>¿Tenés un proyecto en mente?</h2>
+    <p>Hablemos sobre cómo una app a medida puede mejorar tu operación.</p>
+    <div class="contact-links">
+      <a href="https://github.com/lauti2712" target="_blank" class="contact-btn">
+        <i class="ti ti-brand-github"></i> GitHub
+      </a>
+      <!-- Agregá tu email o WhatsApp acá -->
+      <!-- <a href="mailto:tu@email.com" class="contact-btn"><i class="ti ti-mail"></i> Email</a> -->
+      <!-- <a href="https://wa.me/549XXXXXXXXXX" target="_blank" class="contact-btn"><i class="ti ti-brand-whatsapp"></i> WhatsApp</a> -->
+    </div>
+  </section>
+
+  <footer>
+    Construido con dedicación · 2026
+  </footer>
+
+</body>
+</html>
