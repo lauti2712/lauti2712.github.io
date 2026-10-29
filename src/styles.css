@@ -11,20 +11,8 @@
   --accent: #1a56db;
   --radius-md: 8px;
   --radius-lg: 12px;
+  color-scheme: light;
   --font-display: 'Bricolage Grotesque Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1a1a1a;
-    --bg-secondary: #242424;
-    --text: #f0f0f0;
-    --text-secondary: #aaa;
-    --text-tertiary: #666;
-    --border: rgba(255,255,255,0.1);
-    --border-secondary: rgba(255,255,255,0.18);
-    --accent: #4d8ef0;
-  }
 }
 
 body {
@@ -174,16 +162,40 @@ footer {
 .app-indigo { --app-color: #5162d6; }
 .app-purple { --app-color: #8a4fd1; }
 .app-teal   { --app-color: #139a8a; }
-@media (prefers-color-scheme: dark) {
-  .app-blue   { --app-color: #5aa8ef; }
-  .app-orange { --app-color: #f0954a; }
-  .app-red    { --app-color: #ef7070; }
-  .app-indigo { --app-color: #8592f0; }
-  .app-purple { --app-color: #b088ec; }
-  .app-teal   { --app-color: #3cc2b1; }
-}
-
 /* Textos de lectura más angostos en el contenedor ancho */
 .section-sub, .about-grid, .contact p { max-width: 720px; }
 .about-grid { margin-left: 0; }
 .contact p { margin-left: auto; margin-right: auto; }
+
+/* Video de cada app */
+.app-video-btn {
+  font: inherit; font-size: 13px; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 999px; cursor: pointer;
+  color: var(--app-color); background: color-mix(in srgb, var(--app-color) 10%, transparent);
+  border: 0.5px solid color-mix(in srgb, var(--app-color) 35%, transparent);
+}
+.app-video-btn:hover { background: color-mix(in srgb, var(--app-color) 18%, transparent); }
+.app-icon-play { position: relative; cursor: pointer; font: inherit; font-size: 24px; padding: 0; }
+.app-icon-play i {
+  position: absolute; right: -5px; bottom: -5px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--app-color); color: #fff; font-size: 10px;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--bg);
+}
+.video-modal {
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(10, 14, 20, 0.82);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.video-modal video {
+  max-width: min(100%, 720px); max-height: calc(100vh - 96px);
+  border-radius: var(--radius-lg); background: #000;
+}
+.video-modal-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(255,255,255,0.15); color: #fff; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+}

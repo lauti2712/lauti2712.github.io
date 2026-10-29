@@ -1,8 +1,19 @@
-export default function AppCard({ icon, color, para, name, tagline, antes, ahora, features = [], demoUrl, demoLabel = 'Ver demo' }) {
+import { useState } from 'react'
+import VideoModal from './VideoModal.jsx'
+
+export default function AppCard({ icon, color, para, name, tagline, antes, ahora, features = [], video, demoUrl, demoLabel = 'Ver demo' }) {
+  const [showVideo, setShowVideo] = useState(false)
+
   return (
     <article className={`app-card app-${color}`}>
       <div className="app-header">
-        <div className="app-icon">{icon}</div>
+        {video ? (
+          <button className="app-icon app-icon-play" aria-label={`Ver video de ${name}`} onClick={() => setShowVideo(true)}>
+            {icon}<i className="ti ti-player-play" />
+          </button>
+        ) : (
+          <div className="app-icon">{icon}</div>
+        )}
         <div>
           {para && <div className="app-para">{para}</div>}
           <div className="app-name">{name}</div>
@@ -27,7 +38,11 @@ export default function AppCard({ icon, color, para, name, tagline, antes, ahora
         )}
 
         <div className="app-footer">
-          <span />
+          {video ? (
+            <button className="app-video-btn" onClick={() => setShowVideo(true)}>
+              <i className="ti ti-player-play" /> Ver video
+            </button>
+          ) : <span />}
           {demoUrl ? (
             <a href={demoUrl} className="app-link" target="_blank" rel="noopener">
               {demoLabel} <i className="ti ti-arrow-up-right" />
@@ -37,6 +52,10 @@ export default function AppCard({ icon, color, para, name, tagline, antes, ahora
           )}
         </div>
       </div>
+
+      {showVideo && (
+        <VideoModal src={video.src} poster={video.poster} title={name} onClose={() => setShowVideo(false)} />
+      )}
     </article>
   )
 }

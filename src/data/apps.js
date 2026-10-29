@@ -10,6 +10,8 @@
 //   antes     cómo se trabajaba sin la app
 //   ahora     qué cambia con la app
 //   features  hasta 4 beneficios, contados para el dueño del negocio: [{ icon: nombre Tabler sin "ti-", label }]
+//   video     opcional: { src: '/videos/x.mp4', poster: '/videos/x.jpg' } (archivos en public/videos)
+//             muestra "Ver video" y el ícono se puede tocar para verlo
 //   demoUrl   link a la demo; si es null muestra "Demo próximamente"
 //   demoLabel texto del link (opcional, por defecto "Ver demo")
 
@@ -29,6 +31,7 @@ export const apps = [
       { icon: 'receipt', label: 'Cobros y deudas al día' },
       { icon: 'chart-bar', label: 'Cuánto ganás cada mes' },
     ],
+    video: { src: '/videos/piletaspro.mp4', poster: '/videos/piletaspro.jpg' },
     demoUrl: null,
   },
   {
